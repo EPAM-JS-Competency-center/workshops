@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: MIT-0
+
+#name - DNS-friendly name for the workshop. This will be used when generating the hosting URL (ie. https://my-first-workshop.workshops.aws/)
+name: your-workshop-name
+#title - The title of your workshop
+title: YOUR_WORKSHOP_TITLE
+#description - A short description that will be displayed in search results
+description: YOUR_WORKSHOP_DESCRIPTION
+#categories - Refer to official AWS categories covered by the workshop content here
+categories:
+  - Compute
+  - Application Integration
+  - Database
+  - Developer Tools
+  - Mobile
+#services - Refer to the official AWS service names covered by the workshop content here
+services:
+  - Api Gateway
+  - Lambda
+  - DynamoDB
+  - Cloud9
+  - Amplify
+  #level - Approximate skill level needed for this workshop
+level: 300
+#duration - Estimated duration in minutes
+duration: 120 
+#cost - Cost in USD. If the content is offered without cost, enter 0
+cost: 0 
+#author - Amazon alias of the primary author of the content
+author: YOUR_NAME
+#audience - Names of the personas associated with this workshop
+audience:
+  - IT Professional
+  - Developer
