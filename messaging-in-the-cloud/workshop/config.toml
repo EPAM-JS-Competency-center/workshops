@@ -6,7 +6,7 @@ baseURL = "YOUR_BASEURL"
 languageCode = "en-US"
 defaultContentLanguage = "en"
 
-title = "YOUR_WORKSHOP_TITLE"
+title = "Messaging in the Cloud"
 theme = "learn"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
@@ -19,8 +19,8 @@ pygmentsStyle = "monokai"
 enableEmoji = true
 
 [params]
-  description = "YOUR_WORKSHOP_DESCRIPTION"
-  author = "YOUR_NAME"
+  description = "Messaging in the Cloud covers the patterns and best practices with messaging using services SQS, SNS, Amazon MQ, EventBridge"
+  author = "Dragan Jovanovic"
   disableBreadcrumb = false
   disableNextPrev = false
   themeVariant = "aws"
@@ -39,6 +39,6 @@ enableEmoji = true
 
 [Languages]
 [Languages.en]
-  title = "YOUR_WORKSHOP_TITLE"
+  title = "Messaging in the Cloud"
   weight = 1
   languageName = "English"

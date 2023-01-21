@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT-0
 
 #name - DNS-friendly name for the workshop. This will be used when generating the hosting URL (ie. https://my-first-workshop.workshops.aws/)
-name: your-workshop-name
+name: messaging-in-the-cloud
 #title - The title of your workshop
-title: YOUR_WORKSHOP_TITLE
+title: Messaging in the Cloud
 #description - A short description that will be displayed in search results
-description: YOUR_WORKSHOP_DESCRIPTION
+description: Messaging in the Cloud covers the patterns and best practices with messaging using services SQS, SNS, Amazon MQ, EventBridge
 #categories - Refer to official AWS categories covered by the workshop content here
 categories:
   - Compute
@@ -15,19 +15,19 @@ categories:
   - Mobile
 #services - Refer to the official AWS service names covered by the workshop content here
 services:
-  - Api Gateway
-  - Lambda
-  - DynamoDB
+  - SQS
+  - SNS
+  - Amazon MQ
   - Cloud9
-  - Amplify
+  - EventBridge
   #level - Approximate skill level needed for this workshop
 level: 300
 #duration - Estimated duration in minutes
-duration: 120 
+duration: 120
 #cost - Cost in USD. If the content is offered without cost, enter 0
-cost: 0 
+cost: 0
 #author - Amazon alias of the primary author of the content
-author: YOUR_NAME
+author: draganjovanovic
 #audience - Names of the personas associated with this workshop
 audience:
   - IT Professional
