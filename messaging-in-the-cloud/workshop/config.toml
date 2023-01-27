@@ -2,7 +2,7 @@ copyright = "Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved."
 spdx-license-identifier = "CC-BY-SA-4.0"
 
 # Set your own baseURL if it's different
-baseURL = "YOUR_BASEURL"
+baseURL = "https://epam-js-competency-center.github.io/workshops/messaging-in-the-cloud"
 languageCode = "en-US"
 defaultContentLanguage = "en"
 
@@ -12,6 +12,7 @@ metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= true
 
 uglyurls = false
+canonifyURLs = true
 sectionPagesMenu = "main"
 pygmentsCodeFences = true
 pygmentsStyle = "monokai"
