@@ -1,0 +1,29 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "order-app"
+basePath: "/Dev"
+schemes:
+- "https"
+paths:
+  /order:
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        credentials:
+          Fn::GetAtt: [ ApiGwExecutionRole, Arn ]
+        httpMethod: "POST"
+        uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SendOrderToQueue.Arn}/invocations
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+
+

@@ -1,0 +1,135 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Sample SAM Template
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+
+  OrderTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: orders
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: food_name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: food_name
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  AddOrder:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./add-orders/
+      Handler: index.addOrder
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          ORDER_TABLE: !Ref OrderTable
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:PutItem
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  SendOrderToQueue:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./send-order-to-queue/
+      Handler: index.sendOrderToQueue
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - sqs:SendMessage
+            Resource:
+              - "*"
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  OrderApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Dev
+      Cors:
+        AllowMethods: "'POST'"
+        AllowHeaders: "'X-Forwarded-For'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+      DefinitionBody:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location: './api.yaml'
+
+  ApiGwExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "apigateway.amazonaws.com"
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+
+  ApiGwExecutionPolicy:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "apigw-execution-policy"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          Action:
+            - lambda:*
+          Effect: Allow
+          Resource:
+            - !GetAtt AddOrder.Arn
+            - !GetAtt SendOrderToQueue.Arn
+      Roles:
+        - Ref: "ApiGwExecutionRole"
+
+Outputs:
+  DynamoDBTableName:
+    Description: "Table name"
+    Value: !Ref OrderTable
+  AddOrderLambda:
+    Description: "Add order lambda"
+    Value: !GetAtt AddOrder.Arn
+  SendOrderToQueueLambda:
+    Description: "Add order lambda"
+    Value: !GetAtt SendOrderToQueue.Arn
+  OrderApiEndpoint:
+    Description: "API Gateway endpoint URL for Dev stage for Order Get function"
+    Value: !Sub "https://${OrderApi}.execute-api.${AWS::Region}.amazonaws.com/Dev/orders/"
