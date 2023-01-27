@@ -1,6 +1,8 @@
-import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs"
+const AWS = require('aws-sdk');
+const uuid = require('node-uuid');
 
-const sqsClient = new SQSClient({ region: process.env.REGION });
+AWS.config.update({region: 'REGION'});
+const sqsClient = new AWS.SQS({apiVersion: '2012-11-05'});
 const queueUrl = process.env.QUEUE_URL
 
 exports.sendOrderToQueue = async (event) => {
@@ -8,13 +10,13 @@ exports.sendOrderToQueue = async (event) => {
 
   try {
     const params = {
-      DelaySeconds: 2,
-      MessageBody: JSON.stringify(event.body),
+      MessageBody: event.body,
+      MessageGroupId: 'orders',
+      MessageDeduplicationId: uuid.v4(),
       QueueUrl: queueUrl
     };
 
-    const command = new SendMessageCommand(params)
-    await sqsClient.send(command)
+    await sqsClient.sendMessage(params).promise()
     console.log('Published the message to the queue', body)
   } catch (e) {
     console.error(e)

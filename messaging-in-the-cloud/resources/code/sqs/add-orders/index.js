@@ -1,6 +1,7 @@
-import { DocumentClient } from "@aws-sdk/client-dynamodb";
+const AWS = require('aws-sdk');
+AWS.config.update({ region: process.env.REGION });
 
-const docClient = new DocumentClient()
+const dynamoClient = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
 const tableName = process.env.ORDERS
 
@@ -29,7 +30,7 @@ exports.addOrder = async (event) => {
       Item: item,
     }
 
-    await docClient.put(params).promise()
+    await dynamoClient.put(params).promise()
   }
 
   return {

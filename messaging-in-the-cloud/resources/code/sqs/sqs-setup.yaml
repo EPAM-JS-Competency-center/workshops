@@ -36,6 +36,7 @@ Resources:
       Environment:
         Variables:
           ORDER_TABLE: !Ref OrderTable
+          REGION: !Ref "AWS::Region"
       Policies:
         Statement:
           - Effect: Allow
@@ -132,4 +133,4 @@ Outputs:
     Value: !GetAtt SendOrderToQueue.Arn
   OrderApiEndpoint:
     Description: "API Gateway endpoint URL for Dev stage for Order Get function"
-    Value: !Sub "https://${OrderApi}.execute-api.${AWS::Region}.amazonaws.com/Dev/orders/"
+    Value: !Sub "https://${OrderApi}.execute-api.${AWS::Region}.amazonaws.com/Dev/order/"
