@@ -12,7 +12,7 @@ find ~+ -type f -name "config.toml" | while read line ; do
 
   # # Move under that folder and build it
   cd $workshop_path
-  hugo --minify --baseURL "$1/$2"
+  hugo --minify
   cd $current_path
 
   # # Move build file under ./workshops folder since it's our final output for all of them
