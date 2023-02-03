@@ -1,9 +1,9 @@
 const AWS = require('aws-sdk');
 AWS.config.update({ region: process.env.REGION });
 
-const dynamoClient = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+const dynamoClient = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
-const tableName = process.env.ORDERS
+const tableName = process.env.ORDER_TABLE
 
 exports.addOrder = async (event) => {
   const date = new Date().toISOString()
@@ -19,8 +19,8 @@ exports.addOrder = async (event) => {
 
     let item = {
       id: messageId,
-      food_name: parsedBody.data.foodName,
-      amount: parsedBody.data.quantity,
+      food_name: parsedBody.foodName,
+      amount: parsedBody.quantity,
       createdAt: date,
       orderStatus: 'PENDING',
     }
