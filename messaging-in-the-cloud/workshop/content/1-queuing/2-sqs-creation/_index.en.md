@@ -28,7 +28,7 @@ Every queue has it's own url which we can use to send messages to it. On dashboa
 
 ![Choose FIFO queue and type its name](/images/sqs/creation/queue-naming.png)
 
-Because our Lambda `sendOrderToQueue` needs to send message into this queue, we need to provide environment variable to it because it expects it. You can check that in `resources/code/sqs/send-order-to-queue/index.js`. It expect variable `QUEUE_URL`.
+Because our Lambda `sendOrderToQueue` needs to send message into this queue, we need to provide environment variable to it because it expects it. You can check that in `resources/code/send-order-to-queue/index.js`. It expect variable `QUEUE_URL`.
 
 Go to the Lambda service in the AWS and open `sendOrderToQueue` lambda. There you have `Configuration` tab which holds `Environment` and let's add new env variable.
 

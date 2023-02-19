@@ -73,6 +73,37 @@ Resources:
               - logs:*
             Resource:
               - "*"
+  SendToSNS:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./send-to-sns/
+      Handler: index.sendToSNS
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - sns:Publish
+            Resource:
+              - "*"
+          - Effect: Allow
+            Action:
+              - dynamodb:DescribeStream
+              - dynamodb:GetRecords
+              - dynamodb:GetShardIterator
+              - dynamodb:ListStream
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}/*'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
 
   OrderApi:
     Type: AWS::Serverless::Api

@@ -18,7 +18,7 @@ git clone https://github.com/EPAM-JS-Competency-center/workshops
 
 Position yourself in terminal so that we can deploy our stack, all code from workshop will be inside `messaging-in-the-cloud` folder:
 ```
-cd ~/environment/workspace/workshops/messaging-in-the-cloud/resources/code/sqs
+cd ~/environment/workspace/workshops/messaging-in-the-cloud/resources/code
 ```
 
 Because we want to have few stuff precreated for us, which we will be using to connect our SQS to it. Template precreates:
@@ -27,7 +27,7 @@ Because we want to have few stuff precreated for us, which we will be using to c
 - DynamoDB to store our orders
 
 ```
-sam build --template sqs-setup.yaml
+sam build --template template.yaml
 sam deploy --stack-name orders --guided
 ```
 
