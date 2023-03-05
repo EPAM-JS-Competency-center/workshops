@@ -1,5 +1,5 @@
 +++
-title = "Push message"
+title = "Push messages using Pipes"
 weight = 2
 +++
 
@@ -47,11 +47,11 @@ exports.reactToDynamo = async (event) => {
 Because now our lambda does more work, we also need to add permission for this lambda. Open `template.yaml` and find `ReactToDynamo` section which is our Lambda. Under `Policies` > `Statement` add new policy to allow this lambda to push events to the EventBridge.
 
 ```
-- Effect: Allow
-  Action:
-    - events:PutEvents
-  Resource:
-    - "*"
+          - Effect: Allow
+            Action:
+              - events:PutEvents
+            Resource:
+              - "*"
 ```
 
 As you replace this code in the existing function you need to build and deploy again
