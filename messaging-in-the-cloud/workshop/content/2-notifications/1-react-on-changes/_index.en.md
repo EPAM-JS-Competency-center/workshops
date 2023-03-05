@@ -7,11 +7,11 @@ Now that we have SNS topic configured, we need to connect it with DynamoDB. Go t
 
 ![Choose name](/images/sns/react-on-changes/dynamodb-stream.png)
 
-We will enable stream only for the new records, when record is inserted we will stream only that, updates won't be sent. Based on that we should choose `New image` when we are creating DynamoDB Stream.
+We will enable stream for both new and old images. So choose last option `New and old images`
 
 ![Choose name](/images/sns/react-on-changes/dynamodb-stream-creation.png)
 
-Once it's created we need to configure trigger for our DB Stream. Our trigger will be Lambda function which was bootstrapped initially, it's called `send-to-sns`.
+Once it's created we need to configure trigger for our DB Stream. Our trigger will be Lambda function which was bootstrapped initially, it's called `reactToDynamo`.
 
 ![Choose name](/images/sns/react-on-changes/dynamodb-stream-trigger.png)
 
@@ -19,7 +19,7 @@ Our Lambda requires to recieve `TOPIC` as environment variable, and that variabl
 
 ![SNS ARN](/images/sns/react-on-changes/sns-arn.png)
 
-Now we need to add this environment variable to `send-to-sns` lambda. Go to Lambda console and open `send-to-sns` lambda > Configuration > Environment variables
+Now we need to add this environment variable to `reactToDynamo` lambda. Go to Lambda console and open `reactToDynamo` lambda > Configuration > Environment variables
 
 ![SNS ARN](/images/sns/react-on-changes/send-to-sns-env.png)
 

@@ -1,4 +1,4 @@
 +++
-title = "Queuing"
+title = "SQS - Queuing"
 weight = 2
 +++

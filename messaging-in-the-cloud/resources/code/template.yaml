@@ -27,6 +27,49 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
 
+  InvoiceTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: invoices
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: order_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: order_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  CreateInvoice:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./create-invoice/
+      Handler: index.createInvoice
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          INVOICE_TABLE: !Ref InvoiceTable
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:PutItem
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref InvoiceTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
   AddOrder:
     Type: AWS::Serverless::Function
     Properties:
@@ -42,6 +85,31 @@ Resources:
           - Effect: Allow
             Action:
               - dynamodb:PutItem
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  UpdateOrder:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./update-order/
+      Handler: index.updateOrder
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          ORDER_TABLE: !Ref OrderTable
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:UpdateItem
             Resource:
               - !Sub
                 - 'arn:aws:dynamodb:*:*:table/${Table}'
@@ -73,11 +141,11 @@ Resources:
               - logs:*
             Resource:
               - "*"
-  SendToSNS:
+  ReactToDynamo:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./send-to-sns/
-      Handler: index.sendToSNS
+      CodeUri: ./react-to-dynamodb/
+      Handler: index.reactToDynamo
       Runtime: nodejs16.x
       Environment:
         Variables:
@@ -87,6 +155,12 @@ Resources:
           - Effect: Allow
             Action:
               - sns:Publish
+            Resource:
+              - "*"
+        Statement:
+          - Effect: Allow
+            Action:
+              - events:PutEvents
             Resource:
               - "*"
           - Effect: Allow
@@ -148,6 +222,7 @@ Resources:
           Effect: Allow
           Resource:
             - !GetAtt AddOrder.Arn
+            - !GetAtt UpdateOrder.Arn
             - !GetAtt SendOrderToQueue.Arn
       Roles:
         - Ref: "ApiGwExecutionRole"
@@ -156,9 +231,18 @@ Outputs:
   DynamoDBTableName:
     Description: "Table name"
     Value: !Ref OrderTable
+  InvoiceTableName:
+    Description: "Invoice table name"
+    Value: !Ref InvoiceTable
   AddOrderLambda:
     Description: "Add order lambda"
     Value: !GetAtt AddOrder.Arn
+  UpdateOrderLambda:
+    Description: "Update order lambda"
+    Value: !GetAtt UpdateOrder.Arn
+  CreateInvoiceLambda:
+    Description: "Create invoice lambda"
+    Value: !GetAtt CreateInvoice.Arn
   SendOrderToQueueLambda:
     Description: "Add order lambda"
     Value: !GetAtt SendOrderToQueue.Arn
