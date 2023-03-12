@@ -4,8 +4,7 @@ weight = 1
 +++
 
 In this part of the module we will introduce approval phase, invoicing and schedules for our order processing system. We are are going to add rules based on DynamoDB changes to trigger other flows.
-  - When our order gets into `pending` status we will trigger flow to ask for approval
-  - When order gets `cancelled` we will notify the customer
+  - When order gets `cancelled` we will notify us through email
   - When order gets to `paid` status we will create invoice
 
 ![Setup event bridge](/images/eventBridge/setup.png)
