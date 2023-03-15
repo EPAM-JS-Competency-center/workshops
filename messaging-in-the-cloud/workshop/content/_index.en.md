@@ -1,5 +1,5 @@
 +++
-title = "Welcome to the template for AWS Workshops!"
+title = "Welcome to the Messaging In The Cloud!"
 chapter = true
 weight = 1
 +++
