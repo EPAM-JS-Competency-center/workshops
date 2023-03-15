@@ -181,6 +181,7 @@ Resources:
           - Effect: Allow
             Action:
               - events:PutEvents
+              - sns:Publish
             Resource:
               - "*"
           - Effect: Allow
