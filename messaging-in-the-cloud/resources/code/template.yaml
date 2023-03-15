@@ -120,6 +120,32 @@ Resources:
             Resource:
               - "*"
 
+  MarkAsOverdue:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./mark-as-overdue/
+      Handler: index.markAsOverdue
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          ORDER_TABLE: !Ref OrderTable
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:UpdateItem
+              - dynamodb:Scan
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
   SendOrderToQueue:
     Type: AWS::Serverless::Function
     Properties:
@@ -151,12 +177,6 @@ Resources:
         Variables:
           REGION: !Ref "AWS::Region"
       Policies:
-        Statement:
-          - Effect: Allow
-            Action:
-              - sns:Publish
-            Resource:
-              - "*"
         Statement:
           - Effect: Allow
             Action:
