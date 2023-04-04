@@ -1,0 +1,272 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Sample SAM Template
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+
+  OrderTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: orders
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: food_name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: food_name
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  InvoiceTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: invoices
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: order_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: order_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  CreateInvoice:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./create-invoice/
+      Handler: index.createInvoice
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          INVOICE_TABLE: !Ref InvoiceTable
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:PutItem
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref InvoiceTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  AddOrder:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./add-orders/
+      Handler: index.addOrder
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          ORDER_TABLE: !Ref OrderTable
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:PutItem
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  UpdateOrder:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./update-order/
+      Handler: index.updateOrder
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          ORDER_TABLE: !Ref OrderTable
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:UpdateItem
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  MarkAsOverdue:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./mark-as-overdue/
+      Handler: index.markAsOverdue
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          ORDER_TABLE: !Ref OrderTable
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:UpdateItem
+              - dynamodb:Scan
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  SendOrderToQueue:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./send-order-to-queue/
+      Handler: index.sendOrderToQueue
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - sqs:SendMessage
+            Resource:
+              - "*"
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+  ReactToDynamo:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./react-to-dynamodb/
+      Handler: index.reactToDynamo
+      Runtime: nodejs16.x
+      Environment:
+        Variables:
+          REGION: !Ref "AWS::Region"
+      Policies:
+        Statement:
+          - Effect: Allow
+            Action:
+              - events:PutEvents
+              - sns:Publish
+            Resource:
+              - "*"
+          - Effect: Allow
+            Action:
+              - dynamodb:DescribeStream
+              - dynamodb:GetRecords
+              - dynamodb:GetShardIterator
+              - dynamodb:ListStream
+            Resource:
+              - !Sub
+                - 'arn:aws:dynamodb:*:*:table/${Table}/*'
+                - { Table: !Ref OrderTable }
+          - Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - "*"
+
+  OrderApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Dev
+      Cors:
+        AllowMethods: "'POST'"
+        AllowHeaders: "'X-Forwarded-For'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+      DefinitionBody:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location: './api.yaml'
+
+  ApiGwExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "apigateway.amazonaws.com"
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+
+  ApiGwExecutionPolicy:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "apigw-execution-policy"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          Action:
+            - lambda:*
+          Effect: Allow
+          Resource:
+            - !GetAtt AddOrder.Arn
+            - !GetAtt UpdateOrder.Arn
+            - !GetAtt SendOrderToQueue.Arn
+      Roles:
+        - Ref: "ApiGwExecutionRole"
+
+Outputs:
+  DynamoDBTableName:
+    Description: "Table name"
+    Value: !Ref OrderTable
+  InvoiceTableName:
+    Description: "Invoice table name"
+    Value: !Ref InvoiceTable
+  AddOrderLambda:
+    Description: "Add order lambda"
+    Value: !GetAtt AddOrder.Arn
+  UpdateOrderLambda:
+    Description: "Update order lambda"
+    Value: !GetAtt UpdateOrder.Arn
+  CreateInvoiceLambda:
+    Description: "Create invoice lambda"
+    Value: !GetAtt CreateInvoice.Arn
+  SendOrderToQueueLambda:
+    Description: "Add order lambda"
+    Value: !GetAtt SendOrderToQueue.Arn
+  OrderApiEndpoint:
+    Description: "API Gateway endpoint URL for Dev stage for Order Get function"
+    Value: !Sub "https://${OrderApi}.execute-api.${AWS::Region}.amazonaws.com/Dev/order/"
