@@ -1,5 +1,5 @@
 +++
-title = "Push messages using Pipes"
+title = "Push message to EventBridge"
 weight = 2
 +++
 
