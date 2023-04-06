@@ -1,6 +1,6 @@
 +++
 title = "AWS SAM and Workspace"
-weight = 4
+weight = 3
 +++
 
 [AWS SAM](https://aws.amazon.com/serverless/sam/) is an open-source  framework for building serverless applications. It provides shorthand syntax to express functions, APIs, databases, and event source mappings. With just a few lines per resource, you can define the application you want and model it using YAML. During deployment, SAM transforms and expands the SAM syntax into AWS CloudFormation syntax, enabling you to build serverless applications faster.
