@@ -4,4 +4,4 @@ chapter = true
 weight = 1
 +++
 
-![Workshop](/images/epam.png)
+![Workshop](/images/logo.png)
