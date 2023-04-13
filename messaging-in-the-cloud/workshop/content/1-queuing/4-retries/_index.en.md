@@ -15,7 +15,7 @@ Now that we created queue which will act as dead letter, we need to link it to o
 
 ![Creating dead letter queue](/images/sqs/retries/deadletter-link.png)
 
-In order to test this change, let's modify `add-orders/index.js` to fail when it tries to consume the messages, copy this code:
+In order to test this change, let's modify `environment/workspace/workshops/messaging-in-the-cloud/resources/code/add-orders/index.js` to fail when it tries to consume the messages, copy this code:
 
 ```
 const AWS = require('aws-sdk');
@@ -67,7 +67,7 @@ It will fails to consume if we are missing some of the properties, let's deploy 
 ```
 cd ~/environment/workspace/workshops/messaging-in-the-cloud/resources/code
 sam build --template-file template.yaml
-  sam deploy --stack-name orders
+sam deploy --stack-name orders
 ```
 
 Now when we everything ready, let's try and send some request which will keep failing:

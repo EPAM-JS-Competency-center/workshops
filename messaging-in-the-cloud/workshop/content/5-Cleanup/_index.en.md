@@ -14,7 +14,7 @@ Now we can cleanup our environment.
 7. Run command to remove all remaining parts of the stack
 
 ```
-sam delete --stack-name order
+sam delete --stack-name orders
 ```
 
 8. Remove Cloud9 instance

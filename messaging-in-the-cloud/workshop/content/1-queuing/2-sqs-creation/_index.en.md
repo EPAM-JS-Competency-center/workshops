@@ -12,7 +12,7 @@ So in order to fill the blank above, we need to start creating it. Open SQS Serv
 
 ![Create queue](/images/sqs/creation/create-queue.png)
 
-Because we want just to create and connect our Queue for now, let's choose `FIFO` queue and type name `Orders`
+Because we want just to create and connect our Queue for now, let's choose `FIFO` queue and type name `orders.fifo`
 
 ![Choose FIFO queue and type its name](/images/sqs/creation/queue-naming.png)
 
@@ -26,7 +26,7 @@ If you remember from the previous steps, our `sendOrderToQueue` lambda expect us
 
 Every queue has it's own url which we can use to send messages to it. On dashboard of your queue, copy the URL.
 
-![Choose FIFO queue and type its name](/images/sqs/creation/queue-naming.png)
+![Choose FIFO queue and type its name](/images/sqs/creation/queue-url.png)
 
 Because our Lambda `sendOrderToQueue` needs to send message into this queue, we need to provide environment variable to it because it expects it. You can check that in `resources/code/send-order-to-queue/index.js`. It expect variable `QUEUE_URL`.
 

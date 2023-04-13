@@ -60,7 +60,7 @@ exports.addOrder = async (event) => {
 
 ```
 // Open the directory
-cd ~/environment/workshops/messaging-in-the-cloud/resources/code/send-order-to-queue
+cd ~/environment/workspace/workshops/messaging-in-the-cloud/resources/code/add-orders
 
 // Install required library
 npm install node-uuid --save

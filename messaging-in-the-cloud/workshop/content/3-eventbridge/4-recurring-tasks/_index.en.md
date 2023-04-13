@@ -12,7 +12,7 @@ Create order using:
 curl -s --header "Content-Type: application/json"   --request POST   --data '{"foodName": "Pasta", "quantity": 1 }' $API_ENDPOINT
 ```
 
-Before we proceed let's edit our createdAt time so that once our recurring job triggers it will mark it as OVERDUE.
+Before we proceed let's edit our createdAt time so that once our recurring job triggers it will mark it as OVERDUE. Change `createdAt` to be one day in the past.
 
 ![Edit dynamo order](/images/eventBridge/schedules/edit-dynamo-order.png)
 

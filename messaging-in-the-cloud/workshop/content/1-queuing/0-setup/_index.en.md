@@ -11,7 +11,7 @@ This part of the queue will look like this:
 
 First thing first, we need to clone our workshop with all code and templates which will help us deploy stack.
 
-Clone repository in `~/environment` folder
+Clone repository in `~/environment/workspace` folder
 ```
 git clone https://github.com/EPAM-JS-Competency-center/workshops
 ```

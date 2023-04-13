@@ -7,13 +7,13 @@ We need to update our code which pushes messages into the queue. It's our `send-
 
 ```
 // Open the directory
-cd ~/environment/workshops/messaging-in-the-cloud/resources/code/send-order-to-queue
+cd ~/environment/workspace/workshops/messaging-in-the-cloud/resources/code/send-order-to-queue
 
 // Install required library
 npm install amqplib --save
 ```
 
-Open `index.js` inside folder `send-order-to-queue` and replace SQS implementation with this code:
+Open `send-order-to-queue/index.js` inside folder `send-order-to-queue` and replace SQS implementation with this code:
 
 ```
 const uuid = require('node-uuid');
@@ -65,7 +65,7 @@ Now open `send-order-to-queue` Lambda function and it's environment variables, e
       - amqps://{USER_NAME}:{PASSWORD}@{URL}
 
 ```
-QUEUE_URL=amqps://rabbit@{ENTER_YOUR_PASSWORD}@{REST_OF_ENDPOINT}
+QUEUE_URL=amqps://rabbit:{ENTER_YOUR_PASSWORD}@{REST_OF_ENDPOINT}
 QUEUE_NAME=orders
 ```
 

@@ -4,7 +4,7 @@ weight = 2
 +++
 
 Now that we have our event bus and rules, we need to trigger it when DynamoDB changes.
-As you know, we already have our DynamoDB trigger which only push notifications to the SNS, let's open `react-to-dynamodb/index.js` and edit that code to the following:
+As you know, we already have our DynamoDB trigger which only push notifications to the SNS, let's open `environment/workspace/workshops/messaging-in-the-cloud/resources/code/react-to-dynamodb/index.js` and edit that code to the following:
 
 ```
 const AWS = require("aws-sdk");

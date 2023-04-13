@@ -18,22 +18,3 @@ export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/doc
 echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
 source ~/.bash_profile
 ```
-
-3. Setup default template under folder **template.yaml**
-
-```
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Description: >
-  Sample SAM Template
-
-Globals:
-  Function:
-    Timeout: 3
-
-Resources:
-
-Outputs:
-
-
-```
