@@ -1,0 +1,44 @@
+copyright = "Copyright EPAM. All Rights Reserved."
+
+# Set your own baseURL if it's different
+baseURL = "https://epam-js-competency-center.github.io/workshops/commercetools-intro"
+languageCode = "en-US"
+defaultContentLanguage = "en"
+
+title = "MACH Workshop: What is MACH workshops on example of simple application integrated with Commercetools"
+theme = "learn"
+metaDataFormat = "yaml"
+defaultContentLanguageInSubdir= true
+
+uglyurls = false
+canonifyURLs = true
+sectionPagesMenu = "main"
+pygmentsCodeFences = true
+pygmentsStyle = "monokai"
+
+enableEmoji = true
+
+[params]
+  description = "MACH Workshop: What is MACH workshops on example of simple application integrated with Commercetools"
+  author = "MACH CC"
+  disableBreadcrumb = false
+  disableNextPrev = false
+  themeVariant = "aws"
+  disableSearch = false
+  disableAssetsBusting = true
+  disableLanguageSwitchingButton = false
+  disableShortcutsTitle = true
+  disableInlineCopyToClipBoard = true
+
+[outputs]
+  home = [ "HTML", "RSS", "JSON"]
+
+[blackfriday]
+  plainIDAnchors = true
+  hrefTargetBlank = true
+
+[Languages]
+[Languages.en]
+  title = "MACH Workshop: What is MACH workshops on example of simple application integrated with CommercetoolsMACH Workshop: What is MACH workshops on example of simple application integrated with Commercetools"
+  weight = 1
+  languageName = "English"
