@@ -4,7 +4,7 @@ Welcome to the Commercetools and MACH introduction workshop
 
 ## Completing the workshop
 
-The simplest way to complete the workshop is by visiting the hosted version at TODO.
+The simplest way to complete the workshop is by visiting the hosted version at https://epam-js-competency-center.github.io/workshops/commercetools-intro/.
 
 ## What's Included
 
