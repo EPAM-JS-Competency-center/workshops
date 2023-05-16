@@ -19,7 +19,7 @@ We need to select metric for our DLQ, so find metrics which are related to the `
 
 ![CloudWatch selected metric](/images/sns/alarms/alarm-selected-metric.png)
 
-And now we need to configure our metric, what is he avg number on which we want to react?
+And now we need to configure our metric, what is the avg number on which we want to react?
 Let's set `period to 1 minute` and set that our value must be greater then 2. It means that it will send us email that something is wrong after we have more then 2 messages in DLQ.
 
 ![CloudWatch set alarm value](/images/sns/alarms/alarm-value.png)
