@@ -1,0 +1,44 @@
+copyright = "Copyright EPAM. All Rights Reserved."
+
+# Set your own baseURL if it's different
+baseURL = "https://epam-js-competency-center.github.io/workshops/commercetools-extension"
+languageCode = "en-US"
+defaultContentLanguage = "en"
+
+title = "Application based on commercetools extension"
+theme = "learn"
+metaDataFormat = "yaml"
+defaultContentLanguageInSubdir= true
+
+uglyurls = false
+canonifyURLs = true
+sectionPagesMenu = "main"
+pygmentsCodeFences = true
+pygmentsStyle = "monokai"
+
+enableEmoji = true
+
+[params]
+  description = "Application based on commercetools extension"
+  author = "MACH CC"
+  disableBreadcrumb = false
+  disableNextPrev = false
+  themeVariant = "aws"
+  disableSearch = false
+  disableAssetsBusting = true
+  disableLanguageSwitchingButton = false
+  disableShortcutsTitle = true
+  disableInlineCopyToClipBoard = true
+
+[outputs]
+  home = [ "HTML", "RSS", "JSON"]
+
+[blackfriday]
+  plainIDAnchors = true
+  hrefTargetBlank = true
+
+[Languages]
+[Languages.en]
+  title = "Application based on commercetools extension"
+  weight = 1
+  languageName = "English"
