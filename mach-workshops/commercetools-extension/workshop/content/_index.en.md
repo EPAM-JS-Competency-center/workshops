@@ -1,5 +1,5 @@
 +++
-title = "During this session, you will be creating Commercetools extensions and where they are used"
+title = "During this session, you will be creating Commercetools extensions and subscriptions to apply external tax percentage for a cart"
 chapter = true
 weight = 1
 +++
