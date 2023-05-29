@@ -1,26 +1,20 @@
 +++
-title = "Commercetools Payment (Actions, …)"
+title = "Commercetools tax subscription"
 weight = 2
 +++
 
- •Synchronous (Extensions)
-
-        •Trigger types
-
-        •Destination types (AWS Lambda,…)
-
-      •Asynchronous (Subscriptions)
-
-        •Changes types
-
-        •Destination types (AWS SQS, SNS, …)
-
-
 TODO:
 
-1. 
-2. 
-3. 
-4.
+1. Create API commercetools client
+
+2. Lambda implementation
+
+3. Lambda and sqs creation
+
+4. New policy for aws user creation
+
+5. Commercetools subscription creation
+
+6. Verification
 
 
