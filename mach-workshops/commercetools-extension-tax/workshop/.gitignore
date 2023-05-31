@@ -1,6 +1,0 @@
-.vscode/
-.DS_Store
-public/
-.idea/
-resources
-**/**/node_modules/**
