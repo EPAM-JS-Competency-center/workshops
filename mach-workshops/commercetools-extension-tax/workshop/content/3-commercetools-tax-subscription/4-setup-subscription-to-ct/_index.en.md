@@ -1,6 +1,6 @@
 +++
 title = "Create commercetools tax subscription"
-weight = 2
+weight = 50
 +++
 
 
@@ -12,11 +12,11 @@ Steps:
 
 3. Choose 'Subscriptions' in Endpoint field and 'Create' in Command
 
-![Choose name](/images/subscription/subscription-11.png)
+![Choose name](/images/subscription/subscription-12.png)
 
 4. Put provided payload to Payload multiline field and click 'GO!!!'.
 
-
+```
 {
 	"changes": [{
 		"resourceTypeId": "cart"
@@ -30,7 +30,7 @@ Steps:
 	},
 	"key": "tax-subscription"
 }
-
+```
 5. Check response details
 
-![Choose name](/images/subscription/subscription-12.png)
+![Choose name](/images/subscription/subscription-13.png)

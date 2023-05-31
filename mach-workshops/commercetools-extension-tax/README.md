@@ -4,7 +4,7 @@ In this session, you will be building an Commercetools extensions
 
 ## Completing the workshop
 
-The simplest way to complete the workshop is by visiting the hosted version at https://epam-js-competency-center.github.io/workshops/commercetools-extension/.
+The simplest way to complete the workshop is by visiting the hosted version at https://epam-js-competency-center.github.io/workshops/commercetools-extension-tax/.
 
 ## What's Included
 

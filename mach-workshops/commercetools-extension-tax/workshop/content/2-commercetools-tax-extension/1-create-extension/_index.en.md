@@ -1,6 +1,6 @@
 +++
 title = "Create commercetools tax extension"
-weight = 2
+weight = 20
 +++
 
 Steps:
@@ -19,7 +19,7 @@ destination.arn - ARN of your Lambda function
 destination.access* - credentials created previously
 key - unique identificator of extension. Should be set by user
 
-
+```
 {
     "destination": {
         "type": "AWSLambda",
@@ -38,12 +38,9 @@ key - unique identificator of extension. Should be set by user
     ],
     "key": "tax-extension"
 }
-
+```
 5. After that you will see response with extension details
 
 ![Choose name](/images/extension/extension-14.png)
-
-
-Useful links:
 
 

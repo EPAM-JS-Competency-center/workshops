@@ -1,11 +1,12 @@
 +++
 title = "AWS user for lambda execution creation"
-weight = 2
+weight = 20
 +++
 
 Steps:
 
 1. Find IAM AWS service
+
 2. Choose 'Users' -> 'Add users'
 
 ![Choose name](/images/extension/extension-3.png)
@@ -36,7 +37,7 @@ Steps:
 
 ![Choose name](/images/extension/extension-8.png)
 
-9. Enable checkbox on new policy ->Click 'Next' -> 'Create user'
+9. Enable checkbox on new policy -> Click 'Next' -> 'Create user'
 
 
 Create credentials to execute lambda:
@@ -65,4 +66,5 @@ Create credentials to execute lambda:
 
 Useful links:
 
-
+- https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html
+- https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html

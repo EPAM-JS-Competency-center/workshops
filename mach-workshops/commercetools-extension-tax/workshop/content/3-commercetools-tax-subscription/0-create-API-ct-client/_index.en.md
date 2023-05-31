@@ -1,6 +1,6 @@
 +++
 title = "Create commercetools API client"
-weight = 2
+weight = 10
 +++
 
 Steps:
@@ -21,6 +21,6 @@ Steps:
 
 5. Take into account  next disclaimer
 
-![Choose name](/images/subscription/subscription-3.png)
+![Choose name](/images/subscription/subscription-4.png)
 
 6. Copy or download generated code snippet and close the window
