@@ -42,10 +42,10 @@ In order to upload files you need:
         </style>
 ```
 
-- image from content/img folder
+- image for email templates from content/logo_images folder
 
 ```
-        <img src="{{cdn 'img/logo-small.svg'}}" />
+        src="{{store.cdn_path}}/content/logo_images/logo.png">
 ```
 
 ### I will demonstrate one more example later.
