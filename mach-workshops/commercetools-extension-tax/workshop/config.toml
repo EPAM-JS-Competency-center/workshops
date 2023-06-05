@@ -1,7 +1,7 @@
 copyright = "Copyright EPAM. All Rights Reserved."
 
 # Set your own baseURL if it's different
-baseURL = "https://epam-js-competency-center.github.io/workshops/commercetools-extension"
+baseURL = "https://epam-js-competency-center.github.io/workshops/commercetools-extension-tax"
 languageCode = "en-US"
 defaultContentLanguage = "en"
 

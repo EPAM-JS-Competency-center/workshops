@@ -33,7 +33,3 @@ Create lambda with template:
 4. Click 'Create function'
 
 5. On Lambda function page click 'Upload from' -> '.zip file' and upload a file prepared in previous  section
-
-Useful links:
-
--
