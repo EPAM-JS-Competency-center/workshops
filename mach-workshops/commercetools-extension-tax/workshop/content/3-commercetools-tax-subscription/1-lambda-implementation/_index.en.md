@@ -10,10 +10,33 @@ To create lambda for subscription we need to perform call to commercetools proje
 It should be installed node.js and npm on your local machine
 
 Steps to prepare archive:
-1. Open Visual Studio code or any other IDE to work with Node.js and run in terminal next command
+1. Open Visual Studio code or any other IDE to work with Node.js. 
+Create package.json file and insert next content 
+```
+{
+  "name": "workshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@commercetools/sdk-client": "^3.0.0",
+    "@commercetools/sdk-middleware-auth": "^7.0.1",
+    "@commercetools/sdk-middleware-http": "^7.0.2",
+    "node-fetch": "^2.6.11"
+  }
+}
+```
+Or run in terminal next command
 ```
 npm init
 ```
+and copy dependencies from mentioned in package.json above.
+
 2. Create file ct-client.js and index.js
 3. Insert code generated during ct API client creation to ct-client.js and export client with additional line 
 ```
