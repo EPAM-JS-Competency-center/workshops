@@ -32,7 +32,7 @@ Open Control Panel > Account Settings > Users > Create a User Account. You can s
    1. Create token with 'V2/V3 API token' token type.
    2. Play with BigCommerce API using the token. https://developer.bigcommerce.com/docs/api
 
-   ## omework Part 2.
+   ## Homework Part 2.
 
    1. Open Control Panel > Settings > Storefront API Playground.
    2. Play with BigCommerce API with GraphQL Playground.
