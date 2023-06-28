@@ -51,5 +51,12 @@ Workshops which were created for L&amp;D purposes by EPAM Team
         Dragan Jovanovic
       </a>
     </td>
+    <td align="center">
+      <a href="https://github.com/aivliev">
+        <img src="https://avatars.githubusercontent.com/u/3439054?v=4&s=100" width="100"/>
+        <br />
+        Aleksey Ivliev
+      </a>
+    </td>
   </tr>
 </table>
